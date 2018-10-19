@@ -65,4 +65,4 @@ for i in range(x.shape[0]):
     k2=np.argmax(pred[i])
     if(k1==k2):
         correct+=1
-print(correct/x.shape[0])
+print("ACCURACY: ",correct/x.shape[0])
