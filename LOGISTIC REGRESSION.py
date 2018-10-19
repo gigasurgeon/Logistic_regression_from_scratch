@@ -15,9 +15,24 @@ x=np.array(data.iloc[:,:-1])
 y=np.array(data["Species"],dtype="U5").reshape(-1,1)
 one=np.ones((x.shape[0],1))
 x=np.concatenate((one,x),axis=1)
+alpha=0.001
 
 theta=np.zeros((x.shape[1],1))
 
 def cost(x,y,theta):
-    h=np.matmul(x,theta)
-    
+    h1=np.matmul(x,theta)
+    c1=1/(1+np.exp(-h1))
+    return (h1,c1)
+
+def gradient_descent(x,y):
+    global theta
+    iter=10000
+    for i in range(iter):
+        h2,c2=cost(x,y,theta)
+        theta=theta- alpha*(1/x.shape[0])*((-y*np.log(h2))+(y-1)*np.log(1-h2))
+        
+        if i%100==0:
+            print(c2)
+            
+
+gradient_descent(x,y)
