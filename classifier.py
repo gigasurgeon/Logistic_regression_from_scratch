@@ -5,11 +5,11 @@ Created on Sat Dec 29 00:31:20 2018
 @author: CAPTAIN
 """
 
-import os
+import os,sys
 import numpy as np
 import pandas as pd
 import cv2
-import sys
+
 
 #loading training images and test images
 a=os.listdir('train')
@@ -21,7 +21,8 @@ Y=[]
 
 #reading and stacking training data horizontally
 
-for i,file in enumerate(a[:100]) :
+
+for i,file in enumerate(a[:200]) :
     img=cv2.imread('train//'+str(file))
     img=cv2.resize(img,(64,64))
     img=np.array(img)
@@ -37,4 +38,9 @@ X=X[:,1:]
 
 def sigmoid(z):
     return 1/(1+np.exp(-z))
+
+def loss(x,y,theta):
+    
+    loss= (-1/m)*(y*np.log(h)+(1-y)*np.log(1-h))
+    return loss
 
